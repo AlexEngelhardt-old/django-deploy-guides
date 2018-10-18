@@ -66,9 +66,10 @@ sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \['$LOCAL_IPV4'\]/" HiredGun/sett
 sed -i "s/'DIRS': \['.\/templates',\],/'DIRS': \[os\.path\.join(BASE_DIR, '\.\.', 'templates'),\],/" HiredGun/settings/common.py
 ```
 
-- Set production values
+### Set production values
+
 ```
-export SECRET_KEY=$(head -c 16 /dev/urandom | md5sum | cut -f 1 -d\ )
+head -c 16 /dev/urandom | md5sum | cut -f 1 -d\ > secret.txt
 sed -i 's/HiredGun\.settings\.development/Hiredgun\.settings\.production/' manage.py
 sed -i 's/HiredGun\.settings\.development/Hiredgun\.settings\.production/' HiredGun/wsgi.py
 ```
