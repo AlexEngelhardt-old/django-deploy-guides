@@ -69,9 +69,9 @@ sed -i "s/'DIRS': \['.\/templates',\],/'DIRS': \[os\.path\.join(BASE_DIR, '\.\.'
 ### Set production values
 
 ```
-head -c 16 /dev/urandom | md5sum | cut -f 1 -d\ > secret.txt
-sed -i 's/HiredGun\.settings\.development/Hiredgun\.settings\.production/' manage.py
-sed -i 's/HiredGun\.settings\.development/Hiredgun\.settings\.production/' HiredGun/wsgi.py
+head -c 16 /dev/urandom | md5sum | cut -f 1 -d\ > HiredGun/secret.txt
+sed -i 's/HiredGun\.settings\.development/HiredGun\.settings\.production/' manage.py
+sed -i 's/HiredGun\.settings\.development/HiredGun\.settings\.production/' HiredGun/wsgi.py
 ```
 
 ## Configure Apache
