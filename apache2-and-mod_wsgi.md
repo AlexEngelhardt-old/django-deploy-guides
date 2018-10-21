@@ -4,8 +4,14 @@
 ## TODOs
 
 
-- Set DEBUG=False
-- Why do we need to change the template DIRS?
+- Why do we need to change the template DIRS in production but not in development?
+- Finish the [Deployment checklist](https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/)
+- Switch the database to something non-sqlite3
+- enable SSL / HTTPS and satisfy the last `python3 manage.py check --deploy` warnings:
+  - `SECURE_HSTS_SECONDS`
+  - `SECURE_SSL_REDIRECT`
+  - `SESSION_COOKIE_SECURE`
+  - `CSRF_COOKIE_SECURE`
 
 
 ## Set up the EC2 instance
@@ -69,7 +75,7 @@ sed -i "s/'DIRS': \['.\/templates',\],/'DIRS': \[os\.path\.join(BASE_DIR, '\.\.'
 ### Set production values
 
 ```
-head -c 16 /dev/urandom | md5sum | cut -f 1 -d\ > HiredGun/secret.txt
+head -c 50 /dev/urandom | base64 > HiredGun/secret.txt
 sed -i 's/HiredGun\.settings\.development/HiredGun\.settings\.production/' manage.py
 sed -i 's/HiredGun\.settings\.development/HiredGun\.settings\.production/' HiredGun/wsgi.py
 ```
